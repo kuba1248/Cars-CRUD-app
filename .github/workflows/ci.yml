@@ -1,0 +1,14 @@
+name: Testing
+on : push
+
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - name: run django unit test_project
+      run: |
+        pip install django
+        python manage.py test
+      env:
+          DEFAULT_BRANCH: main  

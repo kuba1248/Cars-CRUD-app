@@ -1,0 +1,28 @@
+{% extends 'cars/base.html' %}
+{% block content %}
+<h1>Welcome to CRUD CARS APP</h1>
+<h2>Cars List</h2>
+{% if cl %}
+<ul>
+  {% for car in cl %}
+  <p><a href="{% url 'cars_detail' car.id%}"><li>Car model:&nbsp;{{car.modeli}}</li></a></p>
+  {% endfor %}
+</ul>
+{% else %}
+<p>There are no cars in the DB</p>
+{% endif %}
+<p>
+  {% if ml > 0 %}
+  <a class='btn btn-primary' href="{% url 'cars_create' %}">Add car</a>
+  {% else %}
+  Please add a brand before adding a car
+  {% endif%}
+</p>
+<p>
+<a class='btn btn-primary' href="{% url 'brand_create'  %}">Add brand!</a>
+<a class='btn btn-success' href="{% url 'brand_list'  %}">View brands</a>
+</p>
+
+
+
+{% endblock %}

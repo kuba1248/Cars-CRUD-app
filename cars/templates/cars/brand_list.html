@@ -1,0 +1,23 @@
+{% extends 'cars/base.html' %}
+{% block content %}
+<h1>Brand List</h1>
+{% if brand_list %}
+<ul>
+{% for brand in brand_list %}
+<p>
+<li>
+  {{brand.Brand}}
+  <p><a class='btn btn-danger' href="{% url 'brand_delete' brand.id%}">Delete</a>
+  <a class='btn btn-primary' href="{% url 'brand_update' brand.id%}">Update</a>
+  <a class='btn btn-success' href="{% url 'cars_create' %}">Add car</a>
+</p>
+</li>
+</p>
+{% endfor %}
+</ul>
+{% else %}
+<p>There is no brand in the library!</p>
+{% endif %}
+<p><a class='btn btn-primary' href="{% url 'brand_create'%}">Add a brand</a></p>
+<p><a class='btn btn-primary' href="{% url 'index' %}">Go back</a></p>
+{% endblock %}
