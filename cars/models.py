@@ -7,7 +7,7 @@ from django.core.validators import MinLengthValidator
 class Brand(models.Model):
     Brand = models.CharField(max_length=128,default='BMW',
                             help_text='The company name of the cars',
-                            validators=[MinLengthValidator(4, 'minimum 4 chars')])
+                            validators=[MinLengthValidator(3, 'minimum 3 chars')])
 
     def __str__(self):
         return self.Brand
@@ -53,6 +53,8 @@ class Cars(models.Model):
         ('yellow', 'yellow'),
         ('green', 'green'),
     )
+
+    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, null=False, related_name='cars')
     modeli = models.CharField(max_length=128, unique=True)
     probeg = models.PositiveIntegerField(null=False)
 
@@ -60,17 +62,18 @@ class Cars(models.Model):
     price = models.DecimalField(max_digits=20,decimal_places=2,default=0)
     color = models.CharField(max_length=20,default='gas',
                                  choices=COLOR_TYPE_CHOICES)
+
     engine = models.CharField(max_length=20,default='AWD',
                              choices=DRIVETRAIN_CHOICES)
     style = models.CharField(max_length=20,default='car',
                              choices=BODY_STYLE_CHOICES)
     fuel_type = models.CharField(max_length=100,default='gas',
                                  choices=FUEL_TYPE_CHOICES)
-    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, null=False, related_name='cars')
+
     comment = models.TextField(blank=True)
-    tlike = models.CharField(max_length=20,default='like',
+    i_like = models.CharField(max_length=20,default='like',
                              choices=TLIKE_CHOICES)
-    trating = models.CharField(max_length=20,default='5',
+    i_rating = models.CharField(max_length=20,default='5',
                              choices=TRATING_CHOICES)
     def is_valid_milage(self):
         return self.probeg >= 0

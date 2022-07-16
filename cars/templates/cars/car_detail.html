@@ -5,9 +5,9 @@
 {% if cl %}
 <ul>
   {% for car in cl %}
-  {% if car.id == 1 %}
+
   <p><li>Car id:  {{car.id}}</li></p>
-  <p><li>Car name:  {{car.modeli}}</li></p>
+  <p><li>Car model:  {{car.modeli}}</li></p>
   <p><li>Car company name : {{car.brand}}</li></p>
   <p><li>Car probeg: {{car.probeg}} km</li></p>
 
@@ -17,12 +17,12 @@
   <p><li>Car engine: {{car.engine}}</li></p>
   <p><li>Car style : {{car.style}}</li></p>
   <p><li>Car fuel type: {{car.fuel_type}}</li></p>
-  <p><li>Car likes: {{car.tlike}}</li></p>
-  <p><li>Car rating : {{car.trating}}</li></p>
+  <p><li>Car likes: {{car.i_like}}</li></p>
+  <p><li>Car rating : {{car.i_rating}}</li></p>
   <p><li>Car comment : {{car.comment}}</li></p>
   <a class='btn btn-primary' href="{% url 'cars_update' car.id %}">Update</a>
   <a class='btn btn-danger' href="{% url 'cars_delete' car.id %}">Delete</a>
-  {% endif %}
+
   {% endfor %}
 </ul>
 {% else %}

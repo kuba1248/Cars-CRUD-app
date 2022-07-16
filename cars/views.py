@@ -22,8 +22,8 @@ class MainView(View):
 class carListView(View):
     def get(self, request, id):
         brand_list = Brand.objects.all().count()
-        car_list = Cars.objects.all()
-
+        car_list = Cars.objects.filter(id=id)
+        # .objects.filter(id=id)
         context = {'ml': brand_list, 'cl': car_list}
 
         return render(request, 'cars/car_detail.html', context)
