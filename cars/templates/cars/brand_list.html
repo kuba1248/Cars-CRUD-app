@@ -18,6 +18,6 @@
 {% else %}
 <p>There is no brand in the library!</p>
 {% endif %}
-<p><a class='btn btn-primary' href="{% url 'brand_create'%}">Add a brand</a></p>
-<p><a class='btn btn-primary' href="{% url 'index' %}">Go back</a></p>
+<p><a class='btn btn-primary' href="{% url 'brand_create'%}">Add a brand</a>
+<a class='btn btn-info' href="{% url 'index' %}">Home</a></p>
 {% endblock %}
