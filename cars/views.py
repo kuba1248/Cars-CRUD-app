@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,13 +11,36 @@ from cars.forms import CarsForm, BrandForm
 
 # Create your views here.
 
-class MainView(View):
-    def get(self, request):
-        brand_list = Brand.objects.all().count()
-        car_list = Cars.objects.all()
+class MainView(ListView):
+    paginate_by = 7
+    model = Cars
 
-        context = {'ml': brand_list, 'cl': car_list}
-        return render(request, 'cars/car_list.html', context)
+    def listing(self, request, page):
+        brand_list = Brand.objects.all().count()
+        users = Cars.objects.all().order_by("-id")
+        paginator = Paginator(users, per_page=7)  # 5 users per page
+        page_object = paginator.get_page(page)
+        context = {'ml': brand_list, "page_obj": page_object}
+
+        return render(request, 'cars/cars_list.html', context)
+
+    # def get(self, request):
+    #     brand_list = Brand.objects.all().count()
+    #     car_list = Cars.objects.all()
+    #
+    #     context = {'ml': brand_list, 'cl': car_list}
+    #     return render(request, 'cars/car_list.html', context)
+
+
+def listing(request, page):
+    brand_list = Brand.objects.all().count()
+    users = Cars.objects.all().order_by("id")
+    paginator = Paginator(users, per_page=7)  # 5 users per page
+    page_object = paginator.get_page(page)
+
+    context = {'ml': brand_list, "page_obj": page_object}
+
+    return render(request, 'cars/cars_list.html', context)
 
 
 class carListView(View):

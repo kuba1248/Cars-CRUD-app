@@ -75,6 +75,10 @@ class Cars(models.Model):
                              choices=TLIKE_CHOICES)
     i_rating = models.CharField(max_length=20,default='5',
                              choices=TRATING_CHOICES)
+
+    class Meta:
+        ordering = ['-id']
+
     def is_valid_milage(self):
         return self.probeg >= 0
 
