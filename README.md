@@ -8,6 +8,7 @@
 ### - В создании проекта использовано:
 - Django 4.0.6
 - Python 3.8.10
+- Sqlite3 3.31.1
 
 
 ### Дополнительно: - внедрено "django page pagination" в cars_list.html (в главную страницу - "Home")
