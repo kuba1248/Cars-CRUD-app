@@ -1,6 +1,7 @@
 {% extends 'cars/base.html' %}
 {% block content %}
 <h2>Brand Create</h2>
+<br>
 <form class="form"  method="POST">
   {% csrf_token %}
   {{ form.as_p }}
