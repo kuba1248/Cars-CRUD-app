@@ -30,7 +30,7 @@
 {% endif %}
 <p>
   {% if ml > 0 %}
-  <a class='btn btn-primary' href="{% url 'cars_create' %}">Add car</a>
+  <a class='btn btn-warning' href="{% url 'cars_create' %}">Add car</a>
   {% else %}
   Please add a brand before adding a car
   {% endif%}
@@ -38,7 +38,7 @@
 <p>
 <a class='btn btn-primary' href="{% url 'brand_create'  %}">Add brand!</a>
 <a class='btn btn-success' href="{% url 'brand_list'  %}">View brands</a>
-<a class='btn btn-primary' href="{% url 'index' %}">Home</a>
+<a class='btn btn-info' href="{% url 'index' %}">Home</a>
 </p>
 
 

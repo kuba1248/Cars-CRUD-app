@@ -9,6 +9,9 @@ class Brand(models.Model):
                             help_text='The company name of the cars',
                             validators=[MinLengthValidator(3, 'minimum 3 chars')])
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.Brand
 
@@ -77,7 +80,7 @@ class Cars(models.Model):
                              choices=TRATING_CHOICES)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-id', '-brand']
 
     def is_valid_milage(self):
         return self.probeg >= 0

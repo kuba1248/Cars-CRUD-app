@@ -2,13 +2,23 @@
 {% block content %}
 <center>
 <h1>Welcome to CRUD CARS APP</h1>
-<h2>Cars List</h2>
+<h2>Brand Detail</h2>
 </center>
-{% if page_obj %}
+{% if cl %}
 <ul>
-    {% for car in page_obj %}
-  <p><a href="{% url 'cars_detail' car.id%}"><li><b>{{car.brand}}:&nbsp;{{car.modeli}}</b></li></a></p>
-    {% endfor %}
+
+{% for brand in cl %}
+  <h4><li>Brand:   <b> {{brand.Brand}}</b> </li></h4>
+
+   {% for car in clist %}
+       {% if brand.id == car.brand_id %}
+
+    <p><a href="{% url 'cars_detail' car.id%}"><li>Car model:    <b>{{car.modeli}}</b> </li></a></p>
+
+        {% endif %}
+   {% endfor %}
+
+{% endfor %}
 
 </ul>
 {% else %}
@@ -24,7 +34,7 @@
 <p>
 <a class='btn btn-primary' href="{% url 'brand_create'  %}">Add brand!</a>
 <a class='btn btn-success' href="{% url 'brand_spisok'  %}">brand spisok</a>
-
+<a class='btn btn-info' href="{% url 'index' %}">Home</a>
 </p>
 
 

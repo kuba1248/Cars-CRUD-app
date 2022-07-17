@@ -1,17 +1,14 @@
 {% extends 'cars/base.html' %}
 {% block content %}
-<h1>Brand List</h1>
-{% if brand_list %}
+<h1>Brand Spisok</h1>
+
+{% if brand_spisok %}
 <ul>
-{% for brand in brand_list %}
-<p>
+{% for brand in brand_spisok %}
+<p><a href="{% url 'brand_detail' brand.id%}">
 <li>
   {{brand.Brand}}
-  <p><a class='btn btn-danger' href="{% url 'brand_delete' brand.id%}">Delete</a>
-  <a class='btn btn-primary' href="{% url 'brand_update' brand.id%}">Update</a>
-  <a class='btn btn-warning' href="{% url 'cars_create' %}">Add car</a>
-</p>
-</li>
+</li></a>
 </p>
 {% endfor %}
 </ul>

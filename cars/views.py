@@ -53,10 +53,43 @@ class carListView(View):
         return render(request, 'cars/car_detail.html', context)
 
 
+class brandDetailView(View):
+    paginate_by = 7
+    model = Brand
+
+    # def listing(self, request, page):
+    #     brand_list = Cars.objects.all().count()
+    #     users = Cars.objects.all().filter("-brand")
+    #     paginator = Paginator(users, per_page=7)  # 5 users per page
+    #     page_object = paginator.get_page(page)
+    #     context = {'ml': brand_list, "page_obj": page_object}
+    #
+    #     return render(request, 'cars/brand_detail.html', context)
+
+    def get(self, request, id):
+
+        brand_list = Brand.objects.all().count()
+        brand_spisok = Brand.objects.filter(id=id)
+
+        # if Brand.Brand == Cars.brand:
+        car_list = Cars.objects.all()
+            # .objects.filter(id=id)
+        context = {'ml': brand_list, 'cl': brand_spisok, 'clist': car_list}
+
+        return render(request, 'cars/brand_detail.html', context)
+
+
 class brandListView(ListView):
     model = Brand
     context_object_name = 'brand_list'
     template_name = 'cars/brand_list.html'
+    success_url = reverse_lazy('index')
+
+
+class brandSpisokView(ListView):
+    model = Brand
+    context_object_name = 'brand_spisok'
+    template_name = 'cars/brand_spisok.html'
     success_url = reverse_lazy('index')
 
 
