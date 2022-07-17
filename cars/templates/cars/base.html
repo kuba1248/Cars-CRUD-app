@@ -10,14 +10,27 @@
       style="width:720px; height:222px;"  align="absmiddle">
     </center>
   </head>
+
   <body>
+  {% if not next %}
+    {% url 'index' as next %}
+{% endif %}
     <div class="jumbotron container">
+      {% if user.is_authenticated %}
+  Привет, {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
         {% block content %}
 
 
         {% endblock %}
       <br>
+      <center>
       <h5>coding by k18 :)</h5>
+      </center>
     </div>
   </body>
 </html>

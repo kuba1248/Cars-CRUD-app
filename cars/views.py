@@ -4,6 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.views.generic import View
+from django.contrib.auth.decorators import login_required
 
 from cars.models import Brand, Cars
 from cars.forms import CarsForm, BrandForm
@@ -11,9 +12,12 @@ from cars.forms import CarsForm, BrandForm
 
 # Create your views here.
 
-class MainView(ListView):
+
+class MainView(LoginRequiredMixin, ListView):
     paginate_by = 7
     model = Cars
+
+
 
     def listing(self, request, page):
         brand_list = Brand.objects.all().count()
@@ -44,6 +48,7 @@ def listing(request, page):
 
 
 class carListView(View):
+
     def get(self, request, id):
         brand_list = Brand.objects.all().count()
         car_list = Cars.objects.filter(id=id)
@@ -54,7 +59,7 @@ class carListView(View):
 
 
 class brandDetailView(View):
-    paginate_by = 7
+
     model = Brand
 
     # def listing(self, request, page):
@@ -79,11 +84,11 @@ class brandDetailView(View):
         return render(request, 'cars/brand_detail.html', context)
 
 
-class brandListView(ListView):
-    model = Brand
-    context_object_name = 'brand_list'
-    template_name = 'cars/brand_list.html'
-    success_url = reverse_lazy('index')
+# class brandListView(ListView):
+#     model = Brand
+#     context_object_name = 'brand_list'
+#     template_name = 'cars/brand_list.html'
+#     success_url = reverse_lazy('index')
 
 
 class brandSpisokView(ListView):
@@ -96,18 +101,18 @@ class brandSpisokView(ListView):
 class brandCreateView(CreateView):
     model = Brand
     fields = '__all__'
-    success_url = reverse_lazy('brand_list')
+    success_url = reverse_lazy('brand_spisok')
 
 
 class brandUpdateView(UpdateView):
     model = Brand
     fields = "__all__"
-    success_url = reverse_lazy('brand_list')
+    success_url = reverse_lazy('brand_spisok')
 
 
 class brandDeleteView(DeleteView):
     model = Brand
-    success_url = reverse_lazy('brand_list')
+    success_url = reverse_lazy('brand_spisok')
 
 
 class CarsUpdateView(UpdateView):

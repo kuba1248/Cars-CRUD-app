@@ -1,11 +1,13 @@
 {% extends 'cars/base.html' %}
 {% block content %}
+<center>
 <h2>Brand Create</h2>
+</center>
 <br>
 <form class="form"  method="POST">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit"  value="Save">
-  <a class='btn btn-primary' href="{% url 'index' %}">Cancel</a>
+  <a class='btn btn-primary' href="{% url 'brand_spisok' %}">Cancel</a>
 </form>
 {% endblock %}

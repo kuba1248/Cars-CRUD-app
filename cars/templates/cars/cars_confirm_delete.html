@@ -1,7 +1,9 @@
 {% extends 'cars/base.html' %}
 {% block content %}
+<center>
 <h2>Car Delete</h2>
-<br>
+</center>
+  <br>
 <h2>Are you sure you want to delete <b>{{cars.modeli}}</b>?</h2>
 <form class="form"  method="post">
   {% csrf_token %}
