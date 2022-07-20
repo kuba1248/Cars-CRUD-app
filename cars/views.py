@@ -17,8 +17,6 @@ class MainView(LoginRequiredMixin, ListView):
     paginate_by = 7
     model = Cars
 
-
-
     def listing(self, request, page):
         brand_list = Brand.objects.all().count()
         users = Cars.objects.all().order_by("-id")
@@ -59,7 +57,6 @@ class carListView(View):
 
 
 class brandDetailView(View):
-
     model = Brand
 
     # def listing(self, request, page):
@@ -72,23 +69,53 @@ class brandDetailView(View):
     #     return render(request, 'cars/brand_detail.html', context)
 
     def get(self, request, id):
-
         brand_list = Brand.objects.all().count()
         brand_spisok = Brand.objects.filter(id=id)
 
         # if Brand.Brand == Cars.brand:
         car_list = Cars.objects.all()
-            # .objects.filter(id=id)
+        # .objects.filter(id=id)
         context = {'ml': brand_list, 'cl': brand_spisok, 'clist': car_list}
 
         return render(request, 'cars/brand_detail.html', context)
 
 
-# class brandListView(ListView):
+class brandListView(ListView):
+    model = Brand
+    context_object_name = 'brand_list'
+    template_name = 'cars/brand_list.html'
+    success_url = reverse_lazy('index')
+
+
+#     paginate_by = 7
 #     model = Brand
-#     context_object_name = 'brand_list'
-#     template_name = 'cars/brand_list.html'
-#     success_url = reverse_lazy('index')
+#
+#     def listing2(self, request, page):
+#         car_list = Cars.objects.all().count()
+#         users = Brand.objects.all().order_by("-id")
+#         paginator = Paginator(users, per_page=7)  # 5 users per page
+#         page_object = paginator.get_page(page)
+#         context = {'ml': car_list, "page_obj": page_object}
+#
+#         return render(request, 'cars/brand_list.html', context)
+#
+#     # def get(self, request):
+#     #     brand_list = Brand.objects.all().count()
+#     #     car_list = Cars.objects.all()
+#     #
+#     #     context = {'ml': brand_list, 'cl': car_list}
+#     #     return render(request, 'cars/car_list.html', context)
+#
+#
+# def listing2(request, page):
+#     car_list = Cars.objects.all().count()
+#     users = Brand.objects.all().order_by("id")
+#     paginator = Paginator(users, per_page=7)  # 5 users per page
+#     page_object = paginator.get_page(page)
+#
+#     context = {'ml': car_list, "page_obj": page_object}
+#
+#     return render(request, 'cars/brand_list.html', context)
 
 
 class brandSpisokView(ListView):
@@ -96,6 +123,35 @@ class brandSpisokView(ListView):
     context_object_name = 'brand_spisok'
     template_name = 'cars/brand_spisok.html'
     success_url = reverse_lazy('index')
+
+    paginate_by = 7
+
+    def listing2(self, request, page):
+        car_list = Cars.objects.all().count()
+        users = Brand.objects.all().order_by("-id")
+        paginator = Paginator(users, per_page=7)  # 5 users per page
+        page_object = paginator.get_page(page)
+        context = {'ml': car_list, "page_obj": page_object}
+
+        return render(request, 'cars/brand_spisok.html', context)
+
+    # def get(self, request):
+    #     brand_list = Brand.objects.all().count()
+    #     car_list = Cars.objects.all()
+    #
+    #     context = {'ml': brand_list, 'cl': car_list}
+    #     return render(request, 'cars/car_list.html', context)
+
+
+def listing2(request, page):
+    car_list = Cars.objects.all().count()
+    users = Brand.objects.all().order_by("id")
+    paginator = Paginator(users, per_page=7)  # 5 users per page
+    page_object = paginator.get_page(page)
+
+    context = {'ml': car_list, "page_obj": page_object}
+
+    return render(request, 'cars/brand_spisok.html', context)
 
 
 class brandCreateView(CreateView):

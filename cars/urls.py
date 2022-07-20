@@ -6,9 +6,13 @@ urlpatterns = [
     path('',views.MainView.as_view(),name='index'),
     path("cars_list/<int:page>", views.listing, name="index-by-page"),
     path('cars/<int:id>/detail',views.carListView.as_view(), name='cars_detail'),
-    # path('brands/',views.brandListView.as_view(), name='brand_list'),
 
     path('brandsp/', views.brandSpisokView.as_view(), name='brand_spisok'),
+    path('brandsp/<int:page>', views.listing2, name='brand-by-page'),
+
+    # path("brands/", views.brandListView.as_view(), name='brand_list'),
+    # path("brands/<int:page>",views.listing2, name='brand-by-page'),
+
     path('brandsp/<int:id>/detail', views.brandDetailView.as_view(), name='brand_detail'),
 
     path('brand/create',views.brandCreateView.as_view(), name='brand_create'),

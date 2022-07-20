@@ -1,15 +1,12 @@
 {% extends 'cars/base.html' %}
 {% block content %}
 <h1>Brand List</h1>
-{% if brand_list %}
+{% if page_obj %}
 <ul>
-{% for brand in brand_list %}
+{% for brand in page_obj %}
 <p>
 <li>
   {{brand.Brand}}
-  <p><a class='btn btn-danger' href="{% url 'brand_delete' brand.id%}">Delete</a>
-  <a class='btn btn-primary' href="{% url 'brand_update' brand.id%}">Update</a>
-  <a class='btn btn-warning' href="{% url 'cars_create' %}">Add car</a>
 </p>
 </li>
 </p>
@@ -20,4 +17,24 @@
 {% endif %}
 <p><a class='btn btn-primary' href="{% url 'brand_create'%}">Add a brand</a>
 <a class='btn btn-info' href="{% url 'index' %}">Home</a></p>
+
+  <!-- Pagination -->
+  <div class='pagination justify-content-center'>
+    {% if page_obj.has_previous %}
+      <a href='{% url "brand-by-page" page_obj.previous_page_number %}'>Previous </a>
+    {% endif %}
+
+    <span class='mx-4'>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href='{% url "brand-by-page" page_obj.next_page_number %}' > Next</a>
+    {% endif %}
+
+
+  </div>
+  <!-- END Pagination -->
+
+
 {% endblock %}

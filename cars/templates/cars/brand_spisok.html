@@ -3,19 +3,46 @@
 <center>
 <h1>Brand Spisok</h1>
 </center>
-{% if brand_spisok %}
+{% if page_obj %}
 <ul>
-{% for brand in brand_spisok %}
+{% for brand in page_obj %}
 <p><a href="{% url 'brand_detail' brand.id%}">
 <li>
-  {{brand.Brand}}
+  <b> {{brand.Brand}} </b>
 </li></a>
 </p>
 {% endfor %}
 </ul>
 {% else %}
-<p>There is no brand in the library!</p>
+<p>There is no brand in the DB!</p>
 {% endif %}
+
+<p>
+  {% if ml > 0 %}
+  <a class='btn btn-warning' href="{% url 'cars_create' %}">Add car</a>
+  {% else %}
+  Please add a brand before adding a car
+  {% endif%}
+</p>
 <p><a class='btn btn-primary' href="{% url 'brand_create'%}">Add a brand</a>
 <a class='btn btn-info' href="{% url 'index' %}">Home</a></p>
+
+  <!-- Pagination -->
+  <div class='pagination justify-content-center'>
+    {% if page_obj.has_previous %}
+      <a href='{% url "brand-by-page" page_obj.previous_page_number %}'>Previous </a>
+    {% endif %}
+
+    <span class='mx-4'>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href='{% url "brand-by-page" page_obj.next_page_number %}' > Next</a>
+    {% endif %}
+
+
+  </div>
+  <!-- END Pagination -->
+
 {% endblock %}

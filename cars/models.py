@@ -10,7 +10,7 @@ class Brand(models.Model):
                             validators=[MinLengthValidator(3, 'minimum 3 chars')])
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-id', '-Brand']
 
     def __str__(self):
         return self.Brand
