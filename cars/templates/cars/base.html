@@ -16,7 +16,7 @@
   {% if not next %}
     {% url 'index' as next %}
 {% endif %}
-    <div class="jumbotron">
+    <div class="jumbotron container">
       {% if user.is_authenticated %}
   Привет, {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>

@@ -9,7 +9,12 @@
 
 {% for brand in cl %}
 
+    <img src="{{brand.image.url}}" style="width: 220px; height: 140px;">
+
+
   <h4><li>Brand:   <b> {{brand.Brand}}</b> </li></h4>
+  <h4><li>Brand id:   <b> {{brand.id}}</b> </li></h4>
+
     <p>
          <a class='btn btn-danger' href="{% url 'brand_delete' brand.id%}">Delete</a>
   <a class='btn btn-primary' href="{% url 'brand_update' brand.id%}">Update</a>

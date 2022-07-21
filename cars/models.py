@@ -9,8 +9,10 @@ class Brand(models.Model):
                             help_text='The company name of the cars',
                             validators=[MinLengthValidator(3, 'minimum 3 chars')])
 
+    image = models.ImageField(upload_to="images/", default="images/bmw-logo.jpeg", null=True, blank=True)
+
     class Meta:
-        ordering = ['-id', '-Brand']
+        ordering = ['id', 'Brand']
 
     def __str__(self):
         return self.Brand
@@ -58,7 +60,7 @@ class Cars(models.Model):
     )
 
     brand = models.ForeignKey('Brand', on_delete=models.CASCADE, null=False, related_name='cars')
-    image = models.ImageField(upload_to="images/", null=True, blank=True)
+    image = models.ImageField(upload_to="images/", default="images/bmw.jpg", null=True, blank=True)
     modeli = models.CharField(max_length=128, unique=True)
     probeg = models.PositiveIntegerField(null=False)
 
@@ -81,7 +83,7 @@ class Cars(models.Model):
                              choices=TRATING_CHOICES)
 
     class Meta:
-        ordering = ['-id', '-brand']
+        ordering = ['id', 'brand']
 
     def is_valid_milage(self):
         return self.probeg >= 0

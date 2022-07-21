@@ -14,15 +14,15 @@ from cars.forms import CarsForm, BrandForm
 
 
 class MainView(LoginRequiredMixin, ListView):
-    paginate_by = 7
+    paginate_by = 6
     model = Cars
     fields = ['brand', 'modeli', 'image']
 
     def listing(self, request, page):
         fields = ['brand', 'modeli', 'image']
         brand_list = Brand.objects.all().count()
-        users = Cars.objects.all().order_by("-id")
-        paginator = Paginator(users, per_page=7)  # 5 users per page
+        users = Cars.objects.all().order_by("id")
+        paginator = Paginator(users, per_page=6)  # 5 users per page
         page_object = paginator.get_page(page)
         context = {'ml': brand_list, "page_obj": page_object}
 
@@ -40,7 +40,7 @@ def listing(request, page):
     fields = ['brand', 'modeli', 'image']
     brand_list = Brand.objects.all().count()
     users = Cars.objects.all().order_by("id")
-    paginator = Paginator(users, per_page=7)  # 5 users per page
+    paginator = Paginator(users, per_page=6)  # 5 users per page
     page_object = paginator.get_page(page)
 
     context = {'ml': brand_list, "page_obj": page_object}
@@ -127,12 +127,12 @@ class brandSpisokView(ListView):
     template_name = 'cars/brand_spisok.html'
     success_url = reverse_lazy('index')
 
-    paginate_by = 7
+    paginate_by = 6
 
     def listing2(self, request, page):
         car_list = Cars.objects.all().count()
-        users = Brand.objects.all().order_by("-id")
-        paginator = Paginator(users, per_page=7)  # 5 users per page
+        users = Brand.objects.all().order_by("id")
+        paginator = Paginator(users, per_page=6)  # 5 users per page
         page_object = paginator.get_page(page)
         context = {'ml': car_list, "page_obj": page_object}
 
@@ -149,7 +149,7 @@ class brandSpisokView(ListView):
 def listing2(request, page):
     car_list = Cars.objects.all().count()
     users = Brand.objects.all().order_by("id")
-    paginator = Paginator(users, per_page=7)  # 5 users per page
+    paginator = Paginator(users, per_page=6)  # 5 users per page
     page_object = paginator.get_page(page)
 
     context = {'ml': car_list, "page_obj": page_object}

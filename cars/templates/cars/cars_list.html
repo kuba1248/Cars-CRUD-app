@@ -6,6 +6,39 @@
 <h2>Cars List</h2>
 </center>
 {% if page_obj %}
+
+ <!-- Pagination -->
+  <div class='pagination justify-content-center'>
+      <span class='mx-1'>
+    {% if page_obj.has_previous %}
+
+              <a href="{% url 'index' %}">
+            ⏮
+        </a>
+      </span>
+<span class='mx-2'>
+      <a href='{% url "index-by-page" page_obj.previous_page_number %}'>  ⋖️ </a>
+    {% endif %}
+</span>
+    <span class='mx-1'>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+<span class='mx-2'>
+    {% if page_obj.has_next %}
+      <a href='{% url "index-by-page" page_obj.next_page_number %}' > ⋗️</a>
+</span>
+    <span class='mx-1'>
+              <a href="{% url 'index-by-page' page_obj.paginator.num_pages %}">
+           ⏭️
+        </a>
+    </span>
+    {% endif %}
+
+
+  </div>
+  <!-- END Pagination -->
+
+<br>
 <ul>
   <div class="row">
     {% for car in page_obj %}
@@ -18,8 +51,6 @@
 <div class="row">
     <div class="col">
 <img src="{{car.image.url}}" style="width: 220px; height: 140px;">
-{% else %}
-      <img src="{% static "images/bentley.jpg" %}" style="width: 220px; height: 130px;">
 {% endif %}
     </div>
        <div class="w-100"></div>
@@ -55,29 +86,29 @@
 
   <!-- Pagination -->
   <div class='pagination justify-content-center'>
+      <span class='mx-1'>
     {% if page_obj.has_previous %}
 
               <a href="{% url 'index' %}">
             ⏮
         </a>
-  {% if page_obj.previous_page_number == 1 %}
-      <a href="{% url 'index' %}">
-            ≺️
-        </a>
-      {% else %}
+      </span>
+<span class='mx-2'>
       <a href='{% url "index-by-page" page_obj.previous_page_number %}'>  ⋖️ </a>
     {% endif %}
-    {% endif %}
-    <span class='mx-4'>
+</span>
+    <span class='mx-1'>
       Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
     </span>
-
+<span class='mx-2'>
     {% if page_obj.has_next %}
       <a href='{% url "index-by-page" page_obj.next_page_number %}' > ⋗️</a>
-
+</span>
+    <span class='mx-1'>
               <a href="{% url 'index-by-page' page_obj.paginator.num_pages %}">
            ⏭️
         </a>
+    </span>
     {% endif %}
 
 
