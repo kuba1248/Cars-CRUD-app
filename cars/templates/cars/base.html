@@ -5,6 +5,7 @@
     <title>Cars CRUD by k18</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   {% load static %}
+      {% load humanize %}
     <center>
     <img src="{% static "images/car-sales-logo.jpg" %}"
       style="width:720px; height:222px;"  align="absmiddle">
@@ -15,7 +16,7 @@
   {% if not next %}
     {% url 'index' as next %}
 {% endif %}
-    <div class="jumbotron container">
+    <div class="jumbotron">
       {% if user.is_authenticated %}
   Привет, {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>

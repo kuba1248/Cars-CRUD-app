@@ -16,8 +16,10 @@ from cars.forms import CarsForm, BrandForm
 class MainView(LoginRequiredMixin, ListView):
     paginate_by = 7
     model = Cars
+    fields = ['brand', 'modeli', 'image']
 
     def listing(self, request, page):
+        fields = ['brand', 'modeli', 'image']
         brand_list = Brand.objects.all().count()
         users = Cars.objects.all().order_by("-id")
         paginator = Paginator(users, per_page=7)  # 5 users per page
@@ -35,6 +37,7 @@ class MainView(LoginRequiredMixin, ListView):
 
 
 def listing(request, page):
+    fields = ['brand', 'modeli', 'image']
     brand_list = Brand.objects.all().count()
     users = Cars.objects.all().order_by("id")
     paginator = Paginator(users, per_page=7)  # 5 users per page

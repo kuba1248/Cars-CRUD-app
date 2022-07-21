@@ -58,6 +58,7 @@ class Cars(models.Model):
     )
 
     brand = models.ForeignKey('Brand', on_delete=models.CASCADE, null=False, related_name='cars')
+    image = models.ImageField(upload_to="images/", null=True, blank=True)
     modeli = models.CharField(max_length=128, unique=True)
     probeg = models.PositiveIntegerField(null=False)
 

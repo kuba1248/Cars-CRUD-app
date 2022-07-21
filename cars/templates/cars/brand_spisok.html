@@ -30,15 +30,28 @@
   <!-- Pagination -->
   <div class='pagination justify-content-center'>
     {% if page_obj.has_previous %}
-      <a href='{% url "brand-by-page" page_obj.previous_page_number %}'>Previous </a>
-    {% endif %}
 
+                  <a href="{% url 'brand_spisok' %}">
+            ⏮
+        </a>
+  {% if page_obj.previous_page_number == 1 %}
+      <a href="{% url 'brand_spisok' %}">
+            ≺️
+        </a>
+      {% else %}
+      <a href='{% url "brand-by-page" page_obj.previous_page_number %}'>  ⋖ </a>
+    {% endif %}
+  {% endif %}
     <span class='mx-4'>
       Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
     </span>
 
     {% if page_obj.has_next %}
-      <a href='{% url "brand-by-page" page_obj.next_page_number %}' > Next</a>
+      <a href='{% url "brand-by-page" page_obj.next_page_number %}' > ⋗ </a>
+
+     <a href="{% url 'brand-by-page' page_obj.paginator.num_pages %}">
+           ⏭️
+        </a>
     {% endif %}
 
 

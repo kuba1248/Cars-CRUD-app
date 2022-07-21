@@ -1,16 +1,37 @@
 {% extends 'cars/base.html' %}
 {% block content %}
-
+{% load static %}
 <center>
 <h1>Welcome to CRUD CARS APP</h1>
 <h2>Cars List</h2>
 </center>
 {% if page_obj %}
 <ul>
+  <div class="row">
     {% for car in page_obj %}
-  <p><a href="{% url 'cars_detail' car.id%}"><li><b>{{car.brand}}:&nbsp;{{car.modeli}}</b></li></a></p>
-    {% endfor %}
 
+{% if car.image %}
+
+    <div class="col-sm ">
+
+
+<div class="row">
+    <div class="col">
+<img src="{{car.image.url}}" style="width: 220px; height: 140px;">
+{% else %}
+      <img src="{% static "images/bentley.jpg" %}" style="width: 220px; height: 130px;">
+{% endif %}
+    </div>
+       <div class="w-100"></div>
+<div class="col">
+
+  <p><a href="{% url 'cars_detail' car.id%}"><li><b>{{car.brand}}:&nbsp;{{car.modeli}}</b></li></a></p>
+
+</div>
+    </div>
+    </div>
+      {% endfor %}
+</div>
 </ul>
 {% else %}
 <p>There are no cars in the DB</p>
@@ -31,18 +52,32 @@
 
 
 
+
   <!-- Pagination -->
   <div class='pagination justify-content-center'>
     {% if page_obj.has_previous %}
-      <a href='{% url "index-by-page" page_obj.previous_page_number %}'>Previous </a>
-    {% endif %}
 
+              <a href="{% url 'index' %}">
+            ⏮
+        </a>
+  {% if page_obj.previous_page_number == 1 %}
+      <a href="{% url 'index' %}">
+            ≺️
+        </a>
+      {% else %}
+      <a href='{% url "index-by-page" page_obj.previous_page_number %}'>  ⋖️ </a>
+    {% endif %}
+    {% endif %}
     <span class='mx-4'>
       Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
     </span>
 
     {% if page_obj.has_next %}
-      <a href='{% url "index-by-page" page_obj.next_page_number %}' > Next</a>
+      <a href='{% url "index-by-page" page_obj.next_page_number %}' > ⋗️</a>
+
+              <a href="{% url 'index-by-page' page_obj.paginator.num_pages %}">
+           ⏭️
+        </a>
     {% endif %}
 
 
