@@ -16,7 +16,7 @@ from cars.forms import CarsForm, BrandForm
 class MainView(LoginRequiredMixin, ListView):
     paginate_by = 6
     model = Cars
-    fields = ['brand', 'modeli', 'image']
+    fields = ['id' ,'brand', 'modeli', 'image']
 
     def listing(self, request, page):
         fields = ['brand', 'modeli', 'image']
